@@ -648,7 +648,10 @@ void JogCalcs::suddenHalt(trajectory_msgs::JointTrajectory& joint_traj)
 void JogCalcs::resetVelocityFilters()
 {
   for (std::size_t i = 0; i < num_joints_; ++i)
+  {
     velocity_filters_[i].reset(0);  // Zero velocity
+    position_filters_[i].reset(joint_state_.position[i]);  // Current position
+  }
 }
 
 // Parse the incoming joint msg for the joints of our MoveGroup
